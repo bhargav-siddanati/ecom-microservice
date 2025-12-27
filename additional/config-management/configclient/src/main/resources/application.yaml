@@ -12,3 +12,14 @@ spring:
 #  version: 0.0.1
 #  name: "Local Config build"
 #  type: "Local"
+
+# Reading values from Environment variables
+# BUILD_ID=001;BUILD_VERSION=0.0.0;BUILD_NAME=Default Build Info
+
+# Reading values from Program arguments
+# --BUILD_ID=002 --BUILD_VERSION=0.0.1 --BUILD_NAME="Program Argument Build Info"
+build:
+  id: ${BUILD_ID}
+  version: ${BUILD_VERSION}
+  name: ${BUILD_NAME}
+  type: "Local"
