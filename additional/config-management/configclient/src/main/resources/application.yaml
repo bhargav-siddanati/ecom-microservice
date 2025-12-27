@@ -1,3 +1,9 @@
 spring:
   application:
     name: configclient
+
+build:
+  id: 101
+  version: 0.0.1
+  name: "Local Config build"
+  type: "Local"
