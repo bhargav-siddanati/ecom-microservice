@@ -7,22 +7,29 @@ spring:
 
 # Default values will comment out and no active profiles properties are not existed
 #  then application will failed to start if no active profile is set.
-#build:
-#  id: 101
-#  version: 0.0.1
-#  name: "Local Config build"
-#  type: "Local"
+build:
+  id: 101
+  version: 0.0.1
+  name: "Local Config build"
+  type: "Local"
 
-# Reading values from Environment variables
+# Reading values from Environment variables in Intellij IDE
 # BUILD_ID=001;BUILD_VERSION=0.0.0;BUILD_NAME=Default Build Info
 
-# Reading values from Program arguments
+# Reading values from Program arguments in Intellij IDE
 # --BUILD_ID=002 --BUILD_VERSION=0.0.1 --BUILD_NAME="Program Argument Build Info"
 
 # Using .env file to replace the placeholders
 # Add this file in the Environment variables selection of your .env file
-build:
-  id: ${BUILD_ID}
-  version: ${BUILD_VERSION}
-  name: ${BUILD_NAME}
-  type: "Local"
+
+# command line variables to pass the arguments at runtime
+# java -jar target/Application.jar --build.id=101
+
+# command line variables to pass the arguments at JVM
+# java _Dbuild.id=1022 -jar target/Application.jar
+
+#build:
+#  id: ${BUILD_ID}
+#  version: ${BUILD_VERSION}
+#  name: ${BUILD_NAME}
+#  type: "Local"
