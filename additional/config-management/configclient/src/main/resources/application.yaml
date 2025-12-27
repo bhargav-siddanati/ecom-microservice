@@ -1,11 +1,14 @@
 spring:
   application:
     name: configclient
-  profiles:
-    active: dev
+#  If we comment out the below profiles then build info exist those values will be loaded as default.
+#  profiles:
+#    active: dev
 
-build:
-  id: 101
-  version: 0.0.1
-  name: "Local Config build"
-  type: "Local"
+# Default values will comment out and no active profiles properties are not existed
+#  then application will failed to start if no active profile is set.
+#build:
+#  id: 101
+#  version: 0.0.1
+#  name: "Local Config build"
+#  type: "Local"

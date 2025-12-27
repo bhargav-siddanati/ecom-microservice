@@ -6,14 +6,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BuildInfoController {
+    /* Unfortunately, the profiles active properties is not set or comment out the properties
+       in the application.yaml file then there are no default properties are found for build
+       then the application will failed to start.
 
-    @Value("${build.id}")
+       To avoid this issue, you can set default values for the properties using the syntax:
+       @Value("${property.name:default_value}")
+
+     */
+    @Value("${build.id:000}")
     private String buildId;
 
-    @Value("${build.version}")
+    @Value("${build.version:0.0.0}")
     private String buildVersion;
 
-    @Value("${build.name}")
+    @Value("${build.name:default-build}")
     private String buildName;
 
     @GetMapping("/buildInfo")
