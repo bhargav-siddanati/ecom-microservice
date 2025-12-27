@@ -18,6 +18,9 @@ spring:
 
 # Reading values from Program arguments
 # --BUILD_ID=002 --BUILD_VERSION=0.0.1 --BUILD_NAME="Program Argument Build Info"
+
+# Using .env file to replace the placeholders
+# Add this file in the Environment variables selection of your .env file
 build:
   id: ${BUILD_ID}
   version: ${BUILD_VERSION}
