@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: product-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/productdb?currentSchema=public&TimeZone=Asia/Kolkata
+    username: bhargav
+    password: bhargav
+  h2:
+    console:
+      enabled: true
+  jpa:
+    datasource: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#  h2:
+#    console:
+#      enabled: true
+#  datasource:
+#    url: jdbc:h2:mem:test
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: create
+
+server:
+  port: 8081

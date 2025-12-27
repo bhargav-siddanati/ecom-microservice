@@ -1,0 +1,59 @@
+#spring.application.name=E-Commerce Application
+#spring.h2.console.enable=true
+#spring.datasource.url=jdbc:h2:mem:test
+#spring.jpa.show-sql=true
+#spring.jpa.hibernate.ddl-auto=update
+spring:
+  application:
+    name: E-Commerce Application
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecomdb?stringtype=unspecified&options=-c%20TimeZone=Asia/Kolkata
+    username: bhargav
+    password: bhargav
+  jpa:
+    datasource: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#  datasource:
+#    url: jdbc:h2:mem:test
+#  h2:
+#    console:
+#      enabled: true
+#  jpa:
+#    show-sql: true
+#    hibernate:
+#      ddl-auto: update
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        # dont enable for all endpoints. Enable only required endpoints - beans, health
+  endpoint:
+    health:
+      show-details: always
+      #management.endpoint.shutdown.access=unrestricted
+      # always - shows all details that related to the application - components (db), disk usage, ping, application is up or not, ssl.
+      # never - never shown. It never shows any details.
+      # when-authorized - only authorized access users able to see.
+    shutdown:
+      enabled: true
+      # we should hit a POST: http://localhost:8080/actuator/shutdown
+      # We don't expose this API due to anyone access it and shutdown your application.
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: MyApp
+    description: New App
+    version: 1.0.0
+
+server:
+  shutdown: graceful
+# metrics have 2 endpoints - 1st one, we can see the all types of metrics. 2nd one - we can access actual metrics.
+# loggers have 2 endpoints - without restarting the application we can change the logger type. 1. Provide the details of logging level for each package. 2. Passing a one package to the endpoint to see the log level. To change the log type then we should send a post request to the local host
+# example: POST: http://localhost:8080/actuator/loggers/{package} - JSON BODY - '{"configuredLevel":"DEBUG"}' - receive 204
