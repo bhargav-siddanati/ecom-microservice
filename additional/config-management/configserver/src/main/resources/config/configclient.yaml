@@ -1,0 +1,10 @@
+build:
+  id: 101
+  version: 0.0.1
+  name: "Local Config build"
+  type: "Local"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

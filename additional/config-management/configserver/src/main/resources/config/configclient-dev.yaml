@@ -1,0 +1,11 @@
+build:
+  id: 102
+  version: 1.0.0
+  name: "Dev Config build"
+  type: "Dev"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -5,7 +5,7 @@ spring:
     import: optional:configserver:http://localhost:8888
 #  If we comment out the below profiles then build info exist those values will be loaded as default.
   profiles:
-    active: dev
+    active: prod
 
 # Default values will comment out and no active profiles properties are not existed
 #  then application will failed to start if no active profile is set.
@@ -40,4 +40,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: "refresh"
+        include: "*"
