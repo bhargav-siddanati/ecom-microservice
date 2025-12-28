@@ -1,17 +1,19 @@
 spring:
   application:
     name: configclient
+  config:
+    import: optional:configserver:http://localhost:8888
 #  If we comment out the below profiles then build info exist those values will be loaded as default.
-#  profiles:
-#    active: dev
+  profiles:
+    active: dev
 
 # Default values will comment out and no active profiles properties are not existed
 #  then application will failed to start if no active profile is set.
-build:
-  id: 101
-  version: 0.0.1
-  name: "Local Config build"
-  type: "Local"
+#build:
+#  id: 101
+#  version: 0.0.1
+#  name: "Local Config build"
+#  type: "Local"
 
 # Reading values from Environment variables in Intellij IDE
 # BUILD_ID=001;BUILD_VERSION=0.0.0;BUILD_NAME=Default Build Info
@@ -28,8 +30,8 @@ build:
 # command line variables to pass the arguments at JVM
 # java _Dbuild.id=1022 -jar target/Application.jar
 
-#build:
-#  id: ${BUILD_ID}
-#  version: ${BUILD_VERSION}
-#  name: ${BUILD_NAME}
-#  type: "Local"
+build:
+  id: ${BUILD_ID}
+  version: ${BUILD_VERSION}
+  name: ${BUILD_NAME}
+  type: "Local"

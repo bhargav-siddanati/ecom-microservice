@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@AllArgsConstructor
+//@AllArgsConstructor
 public class BuildInfoController {
 //    private BuildInfo buildInfo;
     /* Unfortunately, the profiles active properties is not set or comment out the properties
