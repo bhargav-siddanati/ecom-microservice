@@ -1,15 +1,15 @@
 package com.configuration.configclient.controller;
 
-import com.configuration.configclient.configurations.BuildInfo;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RefreshScope
 //@AllArgsConstructor
 public class BuildInfoController {
-//    private BuildInfo buildInfo;
+
     /* Unfortunately, the profiles active properties is not set or comment out the properties
        in the application.yaml file then there are no default properties are found for build
        then the application will failed to start.
@@ -33,7 +33,10 @@ public class BuildInfoController {
                 + ", Build Name: " + buildName;
     }
 
-    /*@GetMapping("/buildInfo")
+    /*
+    private BuildInfo buildInfo;
+
+    @GetMapping("/buildInfo")
     public String getBuildInfo(){
         return "Build ID: " + buildInfo.getId() + ", Build Version: "
                 + buildInfo.getVersion()
