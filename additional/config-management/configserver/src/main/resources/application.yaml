@@ -1,3 +1,10 @@
 spring:
   application:
     name: configserver
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/bhargav-siddanati/app-configuration.git
+server:
+  port: 8888
