@@ -1,10 +1,12 @@
 spring:
   application:
     name: user-service
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/bhargav
-      database: userdb
+  config:
+    import: optional:configserver:http://localhost:8888
+#  data:
+#    mongodb:
+#      uri: mongodb://localhost:27017/bhargav
+#      database: userdb
 #  datasource:
 #    url: jdbc:postgresql://localhost:5432/userdb?currentSchema=public&TimeZone=Asia/Kolkata
 #    username: bhargav
