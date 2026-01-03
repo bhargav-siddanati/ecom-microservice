@@ -16,6 +16,7 @@ public class ProviderController {
 
     @GetMapping("/instance-info")
     public String getInstace(){
+        System.out.println("Provider Instance ID: " + INSTANCE_ID + ", Port : " + port);
         return "Provider Instance ID: " + INSTANCE_ID + ", Port : "
                 + port;
     }
