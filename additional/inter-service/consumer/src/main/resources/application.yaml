@@ -4,3 +4,7 @@ spring:
 
 server:
   port: 8080
+
+producer:
+  service:
+    url: http://localhost:8081
