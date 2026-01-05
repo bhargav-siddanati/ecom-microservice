@@ -7,7 +7,7 @@ server:
 
 producer:
   service:
-    url: http://localhost:8081
+    url: http://producer
 
 eureka:
   client:

@@ -11,14 +11,16 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 public class HttpInterfaceConfig {
     @Value("${producer.service.url}")
     private String baseUrl;
-    /*
-    Follow this page to work with RestClient and RestTemplate
-    https://docs.spring.io/spring-framework/reference/6.0/integration/rest-clients.html#rest-http-interface
-     */
-    @Bean
-    public HttpInterfaceProvider webClientHttpInterfaceProvider(){
-        WebClient client = WebClient.builder()
-                .baseUrl(baseUrl)
+
+  /*
+  Follow this page to work with RestClient and RestTemplate
+  https://docs.spring.io/spring-framework/reference/6.0/integration/rest-clients.html#rest-http-interface
+   */
+  @Bean
+  public HttpInterfaceProvider webClientHttpInterfaceProvider(
+       WebClient.Builder builder) { //
+        WebClient client = //WebClient.builder()
+                builder.baseUrl(baseUrl)
                 .build();
         WebClientAdapter adapter = WebClientAdapter.create(client);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(adapter).build();
