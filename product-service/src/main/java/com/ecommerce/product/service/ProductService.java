@@ -1,6 +1,7 @@
 package com.ecommerce.product.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -57,5 +58,10 @@ public class ProductService {
                 .stream()
                 .map(testMapper::productToProductResponse)
                 .collect(Collectors.toList());
+    }
+    public Optional<ProductResponse> getProductById(Long productId){
+      return productRepository.findByIdAndActiveTrue(productId)
+              .map(testMapper::productToProductResponse);
+
     }
 }

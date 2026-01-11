@@ -22,6 +22,13 @@ public class ProductController {
                 HttpStatus.CREATED);
     }
 
+    @GetMapping("/{productId}")
+    public ResponseEntity<ProductResponse> getProductById(@PathVariable Long productId){
+         return productService.getProductById(productId)
+                 .map(ResponseEntity::ok)
+                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @GetMapping
     public ResponseEntity<List<ProductResponse>> getAllProducts(){
         return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
