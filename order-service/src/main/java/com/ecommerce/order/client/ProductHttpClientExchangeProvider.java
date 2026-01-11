@@ -6,7 +6,7 @@ import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
 
 @HttpExchange
-public interface HttpClientExchangeProvider {
+public interface ProductHttpClientExchangeProvider {
     @GetExchange("/api/product/{id}")
     ProductResponse getProductById(@PathVariable Long id);
 }

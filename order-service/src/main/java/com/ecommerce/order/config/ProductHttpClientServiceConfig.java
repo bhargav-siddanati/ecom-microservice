@@ -1,10 +1,9 @@
 package com.ecommerce.order.config;
 
-import com.ecommerce.order.client.HttpClientExchangeProvider;
+import com.ecommerce.order.client.ProductHttpClientExchangeProvider;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.support.RestClientAdapter;
@@ -14,19 +13,9 @@ import java.util.Optional;
 
 @Configuration
 public class ProductHttpClientServiceConfig {
-    @Bean
-    @LoadBalanced
-    public RestClient.Builder getRestBuilderLb(){
-        return RestClient.builder();
-    }
-    @Bean
-    @Primary
-    public RestClient.Builder getRestBuilder(){
-        return RestClient.builder();
-    }
 
     @Bean
-    public HttpClientExchangeProvider getHttpClientExchange(@LoadBalanced RestClient.Builder builder){
+    public ProductHttpClientExchangeProvider getHttpClientExchange(@LoadBalanced RestClient.Builder builder){
         RestClient restClient = builder.baseUrl("http://product-service")
                                         .defaultStatusHandler(HttpStatusCode::is4xxClientError,
                                                 ((request, response) ->
@@ -35,6 +24,6 @@ public class ProductHttpClientServiceConfig {
         RestClientAdapter adapter = RestClientAdapter.create(restClient);
         HttpServiceProxyFactory factory =
                 HttpServiceProxyFactory.builderFor(adapter).build();
-        return factory.createClient(HttpClientExchangeProvider.class);
+        return factory.createClient(ProductHttpClientExchangeProvider.class);
     }
 }

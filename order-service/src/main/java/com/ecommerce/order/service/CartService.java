@@ -1,9 +1,11 @@
 package com.ecommerce.order.service;
 
-import com.ecommerce.order.client.HttpClientExchangeProvider;
+import com.ecommerce.order.client.ProductHttpClientExchangeProvider;
+import com.ecommerce.order.client.UserHttpClientExchangeProvider;
 import com.ecommerce.order.dto.CartItemRequest;
 import com.ecommerce.order.dto.CartItemResponse;
 import com.ecommerce.order.dto.ProductResponse;
+import com.ecommerce.order.dto.UserResponse;
 import com.ecommerce.order.entity.CartItem;
 import com.ecommerce.order.mapper.TestMapper;
 import com.ecommerce.order.repository.CartItemRepositoy;
@@ -20,20 +22,21 @@ import org.springframework.stereotype.Service;
 public class CartService {
   private final CartItemRepositoy cartItemRepositoy;
   private final TestMapper mapper;
-  private final HttpClientExchangeProvider provider;
+  private final ProductHttpClientExchangeProvider provider;
+  private final UserHttpClientExchangeProvider userProvider;
 
   public boolean addToCart(Long userId, CartItemRequest request) {
 
     ProductResponse productOpt = provider.getProductById(request.getProductId());
 
     if (productOpt == null || productOpt.getStockQuantity() < request.getQuantity()) return false;
-
-    /*Optional<User> userOpt = userRespository.findById(Long.valueOf(userId));
-    if(userOpt.isEmpty())
+    System.out.println("Product fetched: " + productOpt.getName());
+    System.out.println("User Started");
+    UserResponse userOpt = userProvider.getUserById(String.valueOf(userId));
+    System.out.println("after User Started");
+    if(userOpt == null)
         return false;
-
-    User user = userOpt.get();*/
-
+    System.out.println("end User Started");
     CartItem existingCartItem =
         cartItemRepositoy.findByUserIdAndProductId(userId, request.getProductId());
     if (existingCartItem != null) {
