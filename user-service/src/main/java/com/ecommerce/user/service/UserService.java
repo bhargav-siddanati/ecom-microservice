@@ -6,6 +6,7 @@ import com.ecommerce.user.entity.User;
 import com.ecommerce.user.mapper.PojoMapper;
 import com.ecommerce.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
     private final UserRepository repository;
     private final PojoMapper mapper;
@@ -32,6 +34,7 @@ public class UserService {
     }
 
     public Optional<UserResponse> getUserById(String id){
+        log.info("Fetching user with id: {}", id);
         return repository.findById(id)
                 .map(mapper::userToUserResponse);
     }
