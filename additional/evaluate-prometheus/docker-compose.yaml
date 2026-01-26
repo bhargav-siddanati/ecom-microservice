@@ -130,7 +130,13 @@ services:
       - ./grafana/datasources:/etc/grafana/provisioning/datasources
     networks:
       - loki
-
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - 9411:9411
+    networks:
+      - loki
   backend:
     image: grafana/loki:latest
     volumes:
