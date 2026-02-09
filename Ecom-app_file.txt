@@ -1,0 +1,15 @@
+Ecom-app
+Git: https://github.com/EmbarkXOfficial/ecom-microservices
+
+Eureka: http://localhost:8761/
+Eureka apps: http://localhost:8761/eureka/apps
+
+
+PgAdmin: http://localhost:5050/browser/
+
+Grafana Graph: http://localhost:12345/graph
+Grafana Explore: http://localhost:3000/explore
+Grafana : http://localhost:3102/ready
+Grafana: http://localhost:3101/ready
+
+Zipkin: http://localhost:9411/zipkin/

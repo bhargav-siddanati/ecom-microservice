@@ -18,9 +18,9 @@ public class GatewayConfig {
          */
         return builder.routes()
                 .route("user-service", r -> r.path("/api/user/**")
-                        .uri("lb://USER_SERVICE"))
+                        .uri("lb://USER-SERVICE"))
                 .route("order-service", r -> r.path("/api/order/**","/api/cart/**")
-                        .uri("lb://ORDER_SERVICE"))
+                        .uri("lb://ORDER-SERVICE"))
                 .route("product-service", r -> r.path("/api/product/**")
                         .uri("lb://PRODUCT-SERVICE"))
                 .route("eureka-service", r -> r.path("/eureka/main")

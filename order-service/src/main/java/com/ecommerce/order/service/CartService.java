@@ -9,6 +9,7 @@ import com.ecommerce.order.dto.UserResponse;
 import com.ecommerce.order.entity.CartItem;
 import com.ecommerce.order.mapper.TestMapper;
 import com.ecommerce.order.repository.CartItemRepositoy;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,6 +26,7 @@ public class CartService {
   private final ProductHttpClientExchangeProvider provider;
   private final UserHttpClientExchangeProvider userProvider;
 
+  @CircuitBreaker(name = "productService", fallbackMethod = "addToCartFallback")
   public boolean addToCart(Long userId, CartItemRequest request) {
 
     ProductResponse productOpt = provider.getProductById(request.getProductId());
@@ -52,6 +54,11 @@ public class CartService {
       cartItemRepositoy.save(item);
     }
     return true;
+  }
+
+  public boolean addToCartFallBack(Long userId, CartItemRequest request, Exception exception){
+    System.out.println("Fallback method called due to: " + exception.getMessage());
+    return false;
   }
 
   public boolean deleteItemFromCart(Long userId, Long productId) {
