@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class CartItemResponse {
   private Long id;
 
-  private Long userId;
+  private String userId;
 
   private Long productId;
 

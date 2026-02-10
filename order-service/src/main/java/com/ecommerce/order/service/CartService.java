@@ -27,7 +27,7 @@ public class CartService {
   private final UserHttpClientExchangeProvider userProvider;
 
   @CircuitBreaker(name = "productService", fallbackMethod = "addToCartFallback")
-  public boolean addToCart(Long userId, CartItemRequest request) {
+  public boolean addToCart(String userId, CartItemRequest request) {
 
     ProductResponse productOpt = provider.getProductById(request.getProductId());
 
@@ -56,12 +56,12 @@ public class CartService {
     return true;
   }
 
-  public boolean addToCartFallBack(Long userId, CartItemRequest request, Exception exception){
+  public boolean addToCartFallBack(String userId, CartItemRequest request, Exception exception){
     System.out.println("Fallback method called due to: " + exception.getMessage());
     return false;
   }
 
-  public boolean deleteItemFromCart(Long userId, Long productId) {
+  public boolean deleteItemFromCart(String userId, Long productId) {
     CartItem cartItem = cartItemRepositoy.findByUserIdAndProductId(userId, productId);
     if (cartItem != null) {
       // This required the transactional enabled.
@@ -77,11 +77,11 @@ public class CartService {
     return null;
   }
 
-  public List<CartItem> getCartItemByUserId(Long id) {
+  public List<CartItem> getCartItemByUserId(String id) {
     return cartItemRepositoy.findByUserId(id);
   }
 
-  public void clearCart(Long id) {
+  public void clearCart(String id) {
     cartItemRepositoy.deleteByUserId(id);
   }
 }
