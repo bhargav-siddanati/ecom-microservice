@@ -72,6 +72,12 @@ resilience4j:
       retryBreaker:
         maxAttempts: 3
         waitDuration: 500ms
+  ratelimiter:
+    instances:
+      ratelimiterbreakers:
+        timeout-duration: 0
+        limit-refresh-period: 4s
+        limit-for-period: 2
 
 # ###############################################33
 # - resilience4j circuit breaker for above spring boot 4 above
