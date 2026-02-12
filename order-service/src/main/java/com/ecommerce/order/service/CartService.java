@@ -10,6 +10,7 @@ import com.ecommerce.order.entity.CartItem;
 import com.ecommerce.order.mapper.TestMapper;
 import com.ecommerce.order.repository.CartItemRepositoy;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,12 +26,13 @@ public class CartService {
   private final TestMapper mapper;
   private final ProductHttpClientExchangeProvider provider;
   private final UserHttpClientExchangeProvider userProvider;
-
-  @CircuitBreaker(name = "productService", fallbackMethod = "addToCartFallback")
+  private int attempt = 0;
+//  @CircuitBreaker(name = "productService", fallbackMethod = "addToCartFallback")
+  @Retry(name = "retryBreaker", fallbackMethod = "addToCartFallBack")
   public boolean addToCart(String userId, CartItemRequest request) {
 
     ProductResponse productOpt = provider.getProductById(request.getProductId());
-
+    System.out.println("Attempt count: " + (++attempt));
     if (productOpt == null || productOpt.getStockQuantity() < request.getQuantity()) return false;
     System.out.println("Product fetched: " + productOpt.getName());
     System.out.println("User Started");

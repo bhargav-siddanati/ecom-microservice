@@ -46,7 +46,7 @@ eureka:
 
 # logging.level.root: info
 # logging.level.com.ecommerce.user: debug
-# saev the logs in a file
+# save the logs in a file
 logging:
   file:
     name: logs/${spring.application.name}.log
@@ -54,6 +54,27 @@ logging:
     rollingpolicy:
       max-file-size: 5MB
       max-history: 7
+# resilience4j circuit breaker working
+resilience4j:
+  circuitbreaker:
+    instances:
+      productService:
+        registerHealthIndicator: true
+        slidingWindowSize: 5
+        minimumNumberOfCalls: 2
+        permittedNumberOfCallsInHalfOpenState: 2
+        waitDurationInOpenState: 10s
+        failureRateThreshold: 50
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        slidingWindowType: count_based
+  retry:
+    instances:
+      retryBreaker:
+        maxAttempts: 3
+        waitDuration: 500ms
+
+# ###############################################33
+# - resilience4j circuit breaker for above spring boot 4 above
 #resilience4j.circuitbreaker:
 #    configs:
 #      default:
@@ -68,14 +89,3 @@ logging:
 #    instances:
 #      productService:
 #        baseConfig: default
-resilience4j.circuitbreaker:
-  instances:
-    productService:
-      registerHealthIndicator: true
-      slidingWindowSize: 5
-      minimumNumberOfCalls: 2
-      permittedNumberOfCallsInHalfOpenState: 2
-      waitDurationInOpenState: 10s
-      failureRateThreshold: 50
-      automaticTransitionFromOpenToHalfOpenEnabled: true
-      slidingWindowType: count_based
