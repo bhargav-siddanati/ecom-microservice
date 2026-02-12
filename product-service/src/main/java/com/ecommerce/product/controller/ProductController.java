@@ -16,10 +16,20 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ProductController {
     private final ProductService productService;
+
     @PostMapping
     public ResponseEntity<ProductResponse> createProduct(@RequestBody ProductRequest productRequest){
         return new ResponseEntity<>(productService.createProduct(productRequest),
                 HttpStatus.CREATED);
+    }
+
+    @GetMapping("/simulate")
+    public ResponseEntity<String> simulateFailure(@RequestParam(defaultValue = "false")
+                                                      boolean fail){
+        if(fail)
+            throw new RuntimeException("Simulated failure");
+
+        return ResponseEntity.ok("Product Service is healthy");
     }
 
     @GetMapping("/{productId}")
