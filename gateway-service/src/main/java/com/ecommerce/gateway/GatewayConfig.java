@@ -18,6 +18,7 @@ public class GatewayConfig {
          */
         return builder.routes()
                 .route("user-service", r -> r.path("/api/user/**")
+                        .filters(f -> f.circuitBreaker(config -> config.setName("gateService")))
                         .uri("lb://USER-SERVICE"))
                 .route("order-service", r -> r.path("/api/order/**","/api/cart/**")
                         .uri("lb://ORDER-SERVICE"))

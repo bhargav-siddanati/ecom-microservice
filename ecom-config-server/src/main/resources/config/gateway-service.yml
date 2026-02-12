@@ -27,18 +27,35 @@
 #              predicates:
 #                - Path=/eureka/**
 
-  server:
-    port: 8080
+server:
+  port: 8080
 
-  management:
-    endpoints:
-      web:
-        exposure:
-          include: "*"
-    tracing:
-      sampling:
-        propability: 1.0
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+  tracing:
+    sampling:
+      propability: 1.0
 
+resilience4j.circuitbreaker:
+  instances:
+    gateService:
+      registerHealthIndicator: true
+      slidingWindowSize: 5
+      minimumNumberOfCalls: 2
+      permittedNumberOfCallsInHalfOpenState: 2
+      waitDurationInOpenState: 10s
+      failureRateThreshold: 50
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      slidingWindowType: count_based
   #eureka:
   #  client:
   #    serviceUrl:
