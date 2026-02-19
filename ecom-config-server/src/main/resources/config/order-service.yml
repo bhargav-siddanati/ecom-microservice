@@ -78,7 +78,13 @@ resilience4j:
         timeout-duration: 0
         limit-refresh-period: 4s
         limit-for-period: 2
-
+rabbitmq:
+  exchange:
+    name: order.exchange
+  queue:
+    name: order.queue
+  routing:
+    key: order.tracking
 # ###############################################33
 # - resilience4j circuit breaker for above spring boot 4 above
 #resilience4j.circuitbreaker:

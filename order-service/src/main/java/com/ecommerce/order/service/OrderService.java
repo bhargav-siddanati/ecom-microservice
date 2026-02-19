@@ -2,6 +2,7 @@ package com.ecommerce.order.service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.ecommerce.order.dto.OrderItemDTO;
@@ -12,6 +13,8 @@ import com.ecommerce.order.entity.OrderItem;
 import com.ecommerce.order.entity.OrderStatus;
 import com.ecommerce.order.repository.OrderRespository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +22,13 @@ import org.springframework.stereotype.Service;
 public class OrderService {
     private final CartService cartService;
     private final OrderRespository orderRespository;
+    private final RabbitTemplate rabbitmqTemplate;
+
+    @Value("${rabbitmq.exchange.name}")
+    private String exchangeName;
+
+    @Value("${rabbitmq.routing.key}")
+    private String routingKey;
 
     public Optional<OrderResponse> placeOrder(String id) {
         //validate for cartItems
@@ -57,6 +67,8 @@ public class OrderService {
 
         //clear the cart
         cartService.clearCart(id);
+
+        rabbitmqTemplate.convertAndSend(exchangeName, routingKey, Map.of("OrderId", savedOrder.getId(), "Status", "CREATED"));
 
         return Optional.of(mapToOrderResponse(savedOrder));
     }
