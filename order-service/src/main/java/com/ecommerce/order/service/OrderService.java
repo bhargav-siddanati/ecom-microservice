@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.ecommerce.order.dto.OrderCreatedEvent;
 import com.ecommerce.order.dto.OrderItemDTO;
 import com.ecommerce.order.dto.OrderResponse;
 import com.ecommerce.order.entity.CartItem;
@@ -68,7 +69,20 @@ public class OrderService {
         //clear the cart
         cartService.clearCart(id);
 
-        rabbitmqTemplate.convertAndSend(exchangeName, routingKey, Map.of("OrderId", savedOrder.getId(), "Status", "CREATED"));
+        // Sending a simple notification to RabbitMQ using a Map
+        /*rabbitmqTemplate.convertAndSend(exchangeName, routingKey, Map.of("OrderId", savedOrder.getId(), "Status", "CREATED"));*/
+
+        // Working with RabbitMQ to send notification using POJO
+        OrderCreatedEvent event = new OrderCreatedEvent(
+                savedOrder.getId(),
+                savedOrder.getUserId(),
+                savedOrder.getStatus(),
+                mapToOrderItemDTOs(savedOrder.getItems()),
+                savedOrder.getTotalAmount(),
+                savedOrder.getCreatedAt()
+        );
+
+        rabbitmqTemplate.convertAndSend(exchangeName, routingKey, event);
 
         return Optional.of(mapToOrderResponse(savedOrder));
     }
@@ -87,5 +101,15 @@ public class OrderService {
                         )).toList(),
                 order.getCreatedAt()
         );
+    }
+    private List<OrderItemDTO> mapToOrderItemDTOs(List<OrderItem> items){
+        return items.stream()
+                .map(item ->
+                        new OrderItemDTO(item.getId(),
+                                item.getProductId(),
+                                item.getQuantity(),
+                                item.getPrice(),
+                                item.getPrice().multiply(new BigDecimal(item.getQuantity()))
+                        )).toList();
     }
 }
