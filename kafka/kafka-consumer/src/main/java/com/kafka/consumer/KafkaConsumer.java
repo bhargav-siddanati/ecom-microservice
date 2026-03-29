@@ -9,4 +9,10 @@ public class KafkaConsumer {
     public void listener(String message){
         System.out.println("Received message from Kafka topic is : " + message);
     }
+
+    // Listening messages from the same topic with different group id
+    @KafkaListener(topics = "my-topic", groupId = "my-new-group-1")
+    public void listener2(String message){
+        System.out.println("Received message from Kafka topic is : " + message);
+    }
 }
