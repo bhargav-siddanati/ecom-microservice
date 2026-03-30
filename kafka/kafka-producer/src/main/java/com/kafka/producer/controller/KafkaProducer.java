@@ -14,22 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class KafkaProducer {
 
-    // Keep both templates for different use cases
-//    private final KafkaTemplate<String, String> kafkaTemplate;
-
     @Autowired
-    private final KafkaTemplate<String, RiderLocation> kafkaObjectTemplate;
+    private final KafkaTemplate<String, RiderLocation> kafkaTemplate;
 
-//    @PostMapping("/send")
-//    public String sendMessage(@RequestParam String message){
-//        kafkaTemplate.send("my-topic", message);
-//        return "Message sent to Kafka topic is : " + message;
-//    }
+   /* @PostMapping("/send")
+    public String sendMessage(@RequestParam String message){
+        kafkaTemplate.send("my-topic", message);
+        return "Message sent to Kafka topic is : " + message;
+    }*/
 
     @PostMapping("/serialize")
     public String serializeObject(){
         RiderLocation location = new RiderLocation(1, 40.531, 13.123);
-        kafkaObjectTemplate.send("my-topic", location);
+        kafkaTemplate.send("my-topic", location);
         return "Message sent to kafka : " + location.toString();
     }
 }
