@@ -14,10 +14,10 @@ import org.springframework.kafka.support.serializer.JacksonJsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration
+//@Configuration
 public class KafkaProducerConfig {
 
-    @Bean
+    /*@Bean
     public ProducerFactory<String, RiderLocation> producerFactory(){
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -30,5 +30,5 @@ public class KafkaProducerConfig {
     @Bean
     public KafkaTemplate<String, RiderLocation> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
-    }
+    }*/
 }
