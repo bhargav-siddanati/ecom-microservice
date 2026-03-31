@@ -1,12 +1,12 @@
 package com.kafka.consumer;
 
 import com.kafka.consumer.dto.RiderLocation;
-import org.springframework.kafka.annotation.KafkaListener;
+//import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 @Component
 public class KafkaConsumer {
-    @KafkaListener(topics = "my-topic", groupId = "my-new-group")
+    //@KafkaListener(topics = "my-topic", groupId = "my-new-group")
     public void listener(RiderLocation message){
         System.out.println("Received message from Kafka topic is : " + message.toString());
     }

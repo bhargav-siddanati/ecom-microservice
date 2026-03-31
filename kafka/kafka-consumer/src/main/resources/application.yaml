@@ -1,8 +1,22 @@
 spring:
   application:
     name: kafka-consumer
+  cloud:
+    function:
+      definition: processRiderLocation
+    stream:
+      function:
+        definition: processRiderLocation
+      bindings:
+        processRiderLocation-in-0:
+          destination: my-topic
+      kafka:
+        binder:
+          brokers: localhost:9092
+server:
+  port: 8081
+
+
 #  kafka:
 #    consumer:
 #      bootstrap-servers: localhost:9092
-server:
-  port: 8081

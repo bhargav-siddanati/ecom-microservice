@@ -14,7 +14,7 @@ public class ProducerCloudStreams {
     @Bean
     public Supplier<RiderLocation> sendRiderLocation(){
         return () -> {
-            RiderLocation loaction = new RiderLocation(101, 32.234, 45.678);
+            RiderLocation loaction = new RiderLocation(103, 12.234, 15.678);
             System.out.println("Sending rider location: " + loaction);
             return loaction;
         };
