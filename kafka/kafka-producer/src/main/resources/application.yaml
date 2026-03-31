@@ -11,6 +11,8 @@ spring:
         sendRiderLocation-out-0:
           destination: my-topic
           content-type: application/json
+      poller:
+        fixed-delay: 60000
       kafka:
         binder:
           brokers: localhost:9092
