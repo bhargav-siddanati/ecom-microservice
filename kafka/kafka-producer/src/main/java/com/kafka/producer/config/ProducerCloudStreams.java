@@ -3,7 +3,10 @@ package com.kafka.producer.config;
 import com.kafka.producer.dto.RiderLocation;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -14,9 +17,20 @@ public class ProducerCloudStreams {
     @Bean
     public Supplier<RiderLocation> sendRiderLocation(){
         return () -> {
-            RiderLocation location = new RiderLocation(100, 12.234, 15.678);
+            RiderLocation location = new RiderLocation(110, 12.234, 15.678);
             System.out.println("Sending rider location: " + location);
             return location;
         };
     }
+    /*@Bean
+    public Function<RiderLocation, Message<RiderLocation>> processLocation() {
+        return location -> {
+            System.out.println("Processing Location for: " + location.id());
+
+            // Adding a custom header for production tracking
+            return MessageBuilder.withPayload(location)
+                    .setHeader("processed-at", System.currentTimeMillis())
+                    .build();
+        };
+    }*/
 }
