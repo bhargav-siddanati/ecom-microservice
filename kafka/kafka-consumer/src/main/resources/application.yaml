@@ -3,13 +3,17 @@ spring:
     name: kafka-consumer
   cloud:
     function:
-      definition: processRiderLocation
+      definition: processRiderLocation; processRiderStatus
     stream:
       function:
-        definition: processRiderLocation
+        definition: processRiderLocation; processRiderStatus
       bindings:
         processRiderLocation-in-0:
           destination: my-topic
+#          group: rider-location-group
+        processRiderStatus-in-0:
+          destination: my-new-topic
+#          group: rider-status-group
       kafka:
         binder:
           brokers: localhost:9092
