@@ -16,6 +16,7 @@ import com.ecommerce.order.repository.OrderRespository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,13 +24,14 @@ import org.springframework.stereotype.Service;
 public class OrderService {
     private final CartService cartService;
     private final OrderRespository orderRespository;
-    private final RabbitTemplate rabbitmqTemplate;
+    private final StreamBridge streamBridge;
+//    private final RabbitTemplate rabbitmqTemplate;
 
-    @Value("${rabbitmq.exchange.name}")
+   /* @Value("${rabbitmq.exchange.name}")
     private String exchangeName;
 
     @Value("${rabbitmq.routing.key}")
-    private String routingKey;
+    private String routingKey;*/
 
     public Optional<OrderResponse> placeOrder(String id) {
         //validate for cartItems
@@ -82,7 +84,8 @@ public class OrderService {
                 savedOrder.getCreatedAt()
         );
 
-        rabbitmqTemplate.convertAndSend(exchangeName, routingKey, event);
+        //rabbitmqTemplate.convertAndSend(exchangeName, routingKey, event);
+        streamBridge.send("placeOrder-out-0", event);
 
         return Optional.of(mapToOrderResponse(savedOrder));
     }

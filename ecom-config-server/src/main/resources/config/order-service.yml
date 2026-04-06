@@ -12,6 +12,17 @@ spring:
     hibernate:
       ddl-auto: create
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+  cloud:
+    stream:
+      bindings:
+        placeOrder-out-0:
+          destination: order.exchange
+          content-type: application/json
+      rabbit:
+        bindings:
+          placeOrder-out-0:
+            producer:
+              routing-key-expression: "'order.tracking'"
   rabbitmq:
     host: ${RABBITMQ_HOST}
     port: ${RABBITMQ_PORT}
