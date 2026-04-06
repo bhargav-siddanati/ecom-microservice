@@ -1,27 +1,27 @@
 package com.ecom.notification;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import org.springframework.amqp.core.*;
-import org.springframework.amqp.core.Message;
-import org.springframework.amqp.core.MessageProperties;
-import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.amqp.rabbit.core.RabbitAdmin;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.support.converter.JacksonJsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConversionException;
-import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+//import com.fasterxml.jackson.core.JsonProcessingException;
+//import com.fasterxml.jackson.databind.ObjectMapper;
+//import java.nio.charset.StandardCharsets;
+//import java.util.Map;
+//import org.springframework.amqp.core.*;
+//import org.springframework.amqp.core.Message;
+//import org.springframework.amqp.core.MessageProperties;
+//import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
+//import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+//import org.springframework.amqp.rabbit.core.RabbitAdmin;
+//import org.springframework.amqp.rabbit.core.RabbitTemplate;
+//import org.springframework.amqp.support.converter.JacksonJsonMessageConverter;
+//import org.springframework.amqp.support.converter.MessageConversionException;
+//import org.springframework.amqp.support.converter.MessageConverter;
+//import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class RabbitmqConfiguration {
-    @Value("${rabbitmq.exchange.name}")
+   /* @Value("${rabbitmq.exchange.name}")
     private String exchangeName;
 
     @Value("${rabbitmq.queue.name}")
@@ -60,6 +60,6 @@ public class RabbitmqConfiguration {
     @Bean
     public MessageConverter messageConverter(ObjectMapper objectMapper) {
         return new JacksonJsonMessageConverter();
-    }
+    }*/
 
 }
