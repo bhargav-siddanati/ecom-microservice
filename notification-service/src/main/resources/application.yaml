@@ -12,18 +12,21 @@ spring:
           destination: order.exchange
           group: notification-group
           content-type: application/json
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+      kafka:
+        binder:
+          brokers: localhost:9092
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
 server:
   port: 8084
 
-rabbitmq:
-  exchange:
-    name: order.exchange
-  queue:
-    name: order.queue
-  routing:
-    key: order.tracking
+#rabbitmq:
+#  exchange:
+#    name: order.exchange
+#  queue:
+#    name: order.queue
+#  routing:
+#    key: order.tracking

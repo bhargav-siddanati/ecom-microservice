@@ -18,16 +18,19 @@ spring:
         placeOrder-out-0:
           destination: order.exchange
           content-type: application/json
-      rabbit:
+      kafka:
         bindings:
-          placeOrder-out-0:
-            producer:
-              routing-key-expression: "'order.tracking'"
-  rabbitmq:
-    host: ${RABBITMQ_HOST}
-    port: ${RABBITMQ_PORT}
-    username: ${RABBITMQ_USER}
-    password: ${RABBITMQ_PASSWORD}
+          brokers: localhost:9092
+#      rabbit:
+#        bindings:
+#          placeOrder-out-0:
+#            producer:
+#              routing-key-expression: "'order.tracking'"
+#  rabbitmq:
+#    host: ${RABBITMQ_HOST}
+#    port: ${RABBITMQ_PORT}
+#    username: ${RABBITMQ_USER}
+#    password: ${RABBITMQ_PASSWORD}
 
 management:
   endpoints:
@@ -89,13 +92,13 @@ resilience4j:
         timeout-duration: 0
         limit-refresh-period: 4s
         limit-for-period: 2
-rabbitmq:
-  exchange:
-    name: order.exchange
-  queue:
-    name: order.queue
-  routing:
-    key: order.tracking
+#rabbitmq:
+#  exchange:
+#    name: order.exchange
+#  queue:
+#    name: order.queue
+#  routing:
+#    key: order.tracking
 # ###############################################33
 # - resilience4j circuit breaker for above spring boot 4 above
 #resilience4j.circuitbreaker:

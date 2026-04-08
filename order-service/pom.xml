@@ -37,7 +37,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+			<artifactId>spring-cloud-stream-binder-kafka</artifactId>
+			<!--	changed from rabbitmq to kafka		-->
 		</dependency>
 		<!--	commented these as moved to spring cloud streams	-->
 		<!--<dependency>
